@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Defines default notes settings
-dir='~/Dropbox/Notes/'
+dir="${HOME}/Dropbox/Notes/"
 ext='.md'
 default='notes.md'
 
