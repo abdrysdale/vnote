@@ -4,7 +4,7 @@
 dir="${HOME}/PhD/Notes/"
 ext='.md'
 default='index.md'
-tag='@'
+tag='#'
 
 cd ${dir}
 # Defaults to default file with no argument
@@ -22,13 +22,13 @@ else
 	then
 		
 		# Lists tags
-		grep -ho ${tag}[a-z]* ${dir}*${ext} | sort | uniq -c | sort -nr
+		grep -ho "${tag}[a-z,_,A-Z]\+" ${dir}*${ext} | sort | uniq -c | sort -nr
 
 	# Can pass --search-tag or -s to search by tags to edit a file.
 	elif [ ${filename} = '--search-tag' ] || [ ${filename} = '-s' ]
 	then
 
-		filename=$(grep -Ho ${tag}[a-z]* ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf --preview="echo {} | cut -d':' -f 1 | xargs cat" | cut -d : -f 1)
+		filename=$(grep -Ho "${tag}[a-z,_,A-Z]\+" ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf --preview="echo {} | cut -d':' -f 1 | xargs cat" | cut -d : -f 1)
 		vim ${dir}${filename}
 
 	else
