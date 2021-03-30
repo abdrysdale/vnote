@@ -5,6 +5,7 @@ dir="${HOME}/PhD/Notes/"
 ext='.md'
 default='index.md'
 
+cd ${dir}
 # Defaults to default file with no argument
 if [ $# -eq 0 ]
 then
@@ -26,7 +27,7 @@ else
 	elif [ ${filename} = '--search-tag' ] || [ ${filename} = '-s' ]
 	then
 
-		filename=$(grep -Ho @[a-z]* ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf | cut -d : -f 1)
+		filename=$(grep -Ho @[a-z]* ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf --preview="echo {} | cut -d':' -f 1 | xargs cat" | cut -d : -f 1)
 		vim ${dir}${filename}
 
 	else
