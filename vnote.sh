@@ -31,6 +31,12 @@ else
 		filename=$(grep -Ho "${tag}[a-z,_,A-Z]\+" ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf --preview="echo {} | cut -d':' -f 1 | xargs cat" | cut -d : -f 1)
 		vim ${dir}${filename}
 
+	# Can pass --copy-search-tag or -cs to search by tags to copy a filename.
+	elif [ ${filename} = '--copy-search-tag' ] || [ ${filename} = '-cs' ]
+	then
+
+		grep -Ho "${tag}[a-z,_,A-Z]\+" ${dir}*${ext} | rev | cut -d'/' -f 1 | rev | fzf --preview="echo {} | cut -d':' -f 1 | xargs cat" | cut -d : -f 1 | tr -d '\n' | xclip -sel clip
+
 	else
 
 		# Checks if an extension was passed and defaults to markdown
