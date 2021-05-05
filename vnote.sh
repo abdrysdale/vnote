@@ -18,7 +18,13 @@ else
 	filename="${1}"
 
 	# Can pass --ls or -l as file name to list tags
-	if [ ${filename} = '--ls' ] || [ ${filename} = '-l' ]
+	if [ ${filename} = '--help' ] || [ ${filename} = '-h' ]
+	then
+		echo "--ls (-l) lists tags"
+		echo "--search-tag (-s) search by tags to edit a file"
+		echo "--copy-search-tag (-cs) search by tags to copy a filename"
+
+	elif [ ${filename} = '--ls' ] || [ ${filename} = '-l' ]
 	then
 		
 		# Lists tags
